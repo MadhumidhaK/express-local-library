@@ -2,7 +2,7 @@ const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const moment = require('moment');
 
-var BookInstance = require('../models/bookinstance');
+var BookInstance = require('../models/bookInstance');
 var Book = require('../models/book');
 
 // Display list of all BookInstances.
