@@ -5,7 +5,7 @@ const { sanitizeBody } = require('express-validator/filter');
 var Book = require('../models/book');
 var Author = require('../models/author');
 var Genre = require('../models/genre');
-var BookInstance = require('../models/bookinstance');
+var BookInstance = require('../models/bookInstance');
 
 
 exports.index = function(req, res) {
