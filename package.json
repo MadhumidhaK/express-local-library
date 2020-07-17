@@ -1,0 +1,31 @@
+{
+  "name": "express-locallibrary",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "set DEBUG=author&&set NODE_ENV=production&&node ./bin/www",
+    "devstart": "set DEBUG=author&&nodemon ./bin/www",
+    "serverstart": "set NODE_ENV=production&&DEBUG=express-locallibrary:* npm run devstart"
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "~1.4.4",
+    "debug": "^2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-validator": "^6.6.0",
+    "helmet": "^3.23.3",
+    "http-errors": "~1.6.3",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.24",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "10.15.1"
+  }
+}
