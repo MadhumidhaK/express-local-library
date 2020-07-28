@@ -8,7 +8,7 @@ var Author = require('../models/author');
 var Book = require('../models/book');
 
 // Display list of all Authors.
-exports.author_list = function(req, res) {
+exports.author_list = function(req, res, next) {
     console.log('Author list');
     Author.find().sort([['last_name', 'ascending']]).exec(function(err, author_list){
         if(err){
@@ -22,7 +22,7 @@ exports.author_list = function(req, res) {
     });
 };
 
-exports.author_list_api = function(req, res) {
+exports.author_list_api = function(req, res, next) {
     console.log('Author list api');
     Author.find().sort([['last_name', 'ascending']]).exec(function(err, author_list){
         if(err){
@@ -37,6 +37,27 @@ exports.author_list_api = function(req, res) {
         });
     });
 };
+
+
+exports.getAuthor = function(req,res, next) {
+    Author.findById(req.params.id).exec(function(err, author){
+        if(err){
+            return res.status(500).json({
+                error: err.message
+            })
+        }
+
+        if(author == null){
+            return res.status(404).json({
+                error: "No Author found"
+            });
+        }
+
+        return res.status(200).json({
+            author: author
+        })
+    })
+}
 
 // Display detail page for a specific Author.
 exports.author_detail = function(req, res,next) {
@@ -263,6 +284,38 @@ exports.author_delete_get = function(req, res) {
         })
    })
 };
+
+exports.author_delete_get_api = function(req, res) {
+    async.parallel({
+        author: function(callback){
+            Author.findById(req.params.id).exec(callback)
+        },
+        author_books: function(callback){
+            Book.find({
+                author: req.params.id
+            }).exec(callback)
+        }
+    }, function(err, results){
+         if(err){
+             debug('update error:' + err);
+             return res.status(500).json({
+                 error: err.message
+             })
+         }
+ 
+         if(results.author == null){
+             res.status(404).json({
+                error: "No Author found"
+            })
+             return;
+         }
+ 
+         res.status(200).json({
+             author: results.author,
+             authorBooks: results.author_books
+         })
+    })
+ };
 
 // Handle Author delete on POST.
 exports.author_delete_post = function(req, res, next) {
@@ -493,7 +546,7 @@ exports.author_update_post_api = [
                             }
                     
                             res.status(200).json({
-                                author: author
+                                author: updatedAuthor
                             });
                     })
                 }
@@ -502,7 +555,9 @@ exports.author_update_post_api = [
         }
     }catch(err){
         debug('update error:' + err);
-        next(err);
+        return res.status(500).json({
+            error: err.message
+        })
     }
     }
 ]
