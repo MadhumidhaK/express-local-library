@@ -9,6 +9,7 @@ var BookInstance = require('../models/bookInstance');
 
 
 exports.index = function(req, res) {
+    console.log('In Book Controller');
     async.parallel({
         book_count: function(callback) {
             Book.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
