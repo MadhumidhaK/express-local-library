@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var wikiRouter = require('./routes/wiki');
 var catalogRouter = require('./routes/catalog');
+var catalogAPIRouter = require('./routes/catalogAPI');
 var db = require('./config/db');
 
 var app = express();
@@ -32,6 +33,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/wiki', wikiRouter);
 app.use('/catalog', catalogRouter);
+console.log('////');
+app.use('/api/catalog', catalogAPIRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,3 +54,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//https://thawing-coast-54422.herokuapp.com/catalog
