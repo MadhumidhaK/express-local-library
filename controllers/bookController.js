@@ -33,19 +33,19 @@ exports.index = function(req, res) {
 
 exports.index_api = function(req, res) {
     async.parallel({
-        book_count: function(callback) {
+        bookCount: function(callback) {
             Book.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
         },
-        book_instance_count: function(callback) {
+        bookInstanceCount: function(callback) {
             BookInstance.countDocuments({}, callback);
         },
-        book_instance_available_count: function(callback) {
+        bookInstanceAvailableCount: function(callback) {
             BookInstance.countDocuments({status:'Available'}, callback);
         },
-        author_count: function(callback) {
+        authorCount: function(callback) {
             Author.countDocuments({}, callback);
         },
-        genre_count: function(callback) {
+        genreCount: function(callback) {
             Genre.countDocuments({}, callback);
         }
     }, function(err, results) {
