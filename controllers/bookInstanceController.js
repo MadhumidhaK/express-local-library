@@ -261,6 +261,11 @@ exports.bookinstance_delete_post_api = function(req, res) {
             })
         }
         // Success - go to author list
+        if(bookInstance == null){
+            return res.status(404).json({
+               error: "No book instance exists, it might have been deleted already."
+           })
+       }
         res.status(200).json({
             success: true
         })
@@ -390,7 +395,7 @@ exports.bookinstance_update_post_api = [
    }
    else {
        // Data from form is valid.
-       BookInstance.findByIdAndUpdate(req.params.id, bookinstance).exec(function(err, updatedBookInstance){
+       BookInstance.findByIdAndUpdate(req.params.id, bookinstance, {new: true}).exec(function(err, updatedBookInstance){
         if (err) {
             console.log(err);
              return res.status(500).json({

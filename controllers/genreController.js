@@ -276,11 +276,19 @@ exports.genre_delete_post_api = function(req, res, next) {
             })
          }
         // Success
+        
         console.log('//Success');
+        if(results.genre == null){
+            res.status(404).json({ 
+                error: 'No Genre Found for this Name'
+            } );
+            return; 
+        }
         if (results.genre_books.length > 0) {
             res.status(405).json({ 
                 genre: results.genre, 
-                genreBooks: results.genre_books 
+                genreBooks: results.genre_books,
+                error: 'Can\'t delete Genre as it has books associated'
             } );
             return;
         }
@@ -395,7 +403,7 @@ exports.genre_update_post_api = [validator.body('name', 'Genre name required').t
             if(existing_genre){
                 return res.redirect(existing_genre.url);
             }else{
-                Genre.findByIdAndUpdate(req.params.id, genre).exec(function(err, updatedGenre){
+                Genre.findByIdAndUpdate(req.params.id, genre, {new: true}).exec(function(err, updatedGenre){
                     if(err){
                         return  res.status(500).json({
                             error: err.message

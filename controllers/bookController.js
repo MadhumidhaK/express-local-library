@@ -445,6 +445,14 @@ exports.book_delete_post_api = function(req, res, next) {
     }
         // Success
         console.log('//Success');
+        if(results.book == null){
+            console.log('Null');
+            res.status(404).json({
+                error: 'No book exists for this ID'
+            });
+           //  res.redirect('/catalog/books');
+            return;
+        }
         if (results.bookInstances.length > 0) {
             res.status(405).json({
                 error: 'Delete the copies of this book, before trying delete the book',
@@ -703,7 +711,7 @@ exports.book_update_post_api = [
         }
         else {
             // Data from form is valid. Update the record.
-            Book.findByIdAndUpdate(req.params.id, book, {}, function (err,updatedBook) {
+            Book.findByIdAndUpdate(req.params.id, book,{new: true}, function (err,updatedBook) {
                 if (err) { 
                     return res.status(500).json({
                         error: err.message

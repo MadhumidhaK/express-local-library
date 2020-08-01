@@ -375,6 +375,12 @@ exports.author_delete_post_api = function(req, res, next) {
         }
         // Success
         console.log('//Success');
+        if(results.author == null){
+            res.status(404).json({
+               error: "No Author found"
+           })
+            return;
+        }
         if (results.authors_books.length > 0) {
             
             // Author has books. Render in same way as for GET route.
@@ -537,7 +543,7 @@ exports.author_update_post_api = [
                         date_of_death: req.body.date_of_death
                     }
                     
-                    Author.findByIdAndUpdate(req.params.id, author, {}, function(err, updatedAuthor){
+                    Author.findByIdAndUpdate(req.params.id, author, {new: true}, function(err, updatedAuthor){
                         if (err) {
                             debug('update error:' + err);
                             return res.status(500).json({
