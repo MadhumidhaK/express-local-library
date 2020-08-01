@@ -533,6 +533,7 @@ exports.author_update_post_api = [
                 }
                 if(existingAuthor._id !== req.params.id){
                     res.status(400).json({
+                        author: existingAuthor,
                         error: 'Author already exists'
                     })
                 }else{
