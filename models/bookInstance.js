@@ -23,7 +23,7 @@ var bookInstanceSchema = new Schema({
         type: Date,
         default: Date.now(),
         required: function(){
-            this.status !== "Available"
+            return this.status !== "Available"
         }
     }
 });
