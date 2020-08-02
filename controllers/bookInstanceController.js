@@ -124,7 +124,7 @@ exports.bookinstance_create_post =[
       });
       if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
         console.log(bookinstance)
-        res.status(400).json({
+       return res.status(400).json({
           error: "Validation Error",
           book_list: [], 
           selected_book: req.params.id , 
@@ -185,7 +185,7 @@ exports.bookinstance_create_post_api =[
 
       if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
         console.log(bookinstance)
-        res.status(400).json({
+        return res.status(400).json({
           error: "Validation Error",
           book_list: [], 
           selected_book: req.params.id , 
@@ -364,7 +364,7 @@ exports.bookinstance_update_post = [
       };
       if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
         console.log(bookinstance)
-        res.status(400).json({
+        return res.status(400).json({
           error: "Validation Error",
           book_list: [], 
           selected_book: req.params.id , 
@@ -423,7 +423,7 @@ exports.bookinstance_update_post_api = [
       };
     if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
       console.log(bookinstance)
-      res.status(400).json({
+      return res.status(400).json({
         error: "Validation Error",
         book_list: [], 
         selected_book: req.params.id , 
