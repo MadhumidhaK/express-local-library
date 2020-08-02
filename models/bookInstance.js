@@ -21,7 +21,10 @@ var bookInstanceSchema = new Schema({
     },
     due_back: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
+        required: function(){
+            this.status !== "Available"
+        }
     }
 });
 
