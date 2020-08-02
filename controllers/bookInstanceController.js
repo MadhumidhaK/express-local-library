@@ -122,6 +122,21 @@ exports.bookinstance_create_post =[
        status: req.body.status,
        due_back: req.body.due_back
       });
+      if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
+        console.log(bookinstance)
+        res.status(400).json({
+          error: "Validation Error",
+          book_list: [], 
+          selected_book: req.params.id , 
+          errors: [
+              {
+                  param: due_back,
+                  msg: "Due date is required"
+              }
+          ], 
+          bookinstance: req.body 
+      });    
+      }
 
    if (!errors.isEmpty()) {
        // There are errors. Render form again with sanitized values and error messages.
@@ -167,6 +182,22 @@ exports.bookinstance_create_post_api =[
        status: req.body.status,
        due_back: req.body.due_back
       });
+
+      if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
+        console.log(bookinstance)
+        res.status(400).json({
+          error: "Validation Error",
+          book_list: [], 
+          selected_book: req.params.id , 
+          errors: [
+              {
+                  param: due_back,
+                  msg: "Due date is required"
+              }
+          ], 
+          bookinstance: req.body 
+      });    
+      }
 
    if (!errors.isEmpty()) {
        // There are errors. Render form again with sanitized values and error messages.
@@ -331,8 +362,21 @@ exports.bookinstance_update_post = [
         status: req.body.status,
         due_back: req.body.due_back
       };
-      console.log(".......");
-      console.log(bookinstance);
+      if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
+        console.log(bookinstance)
+        res.status(400).json({
+          error: "Validation Error",
+          book_list: [], 
+          selected_book: req.params.id , 
+          errors: [
+              {
+                  param: due_back,
+                  msg: "Due date is required"
+              }
+          ], 
+          bookinstance: req.body 
+      });    
+      }
    if (!errors.isEmpty()) {
         req.body.book = oldBookInstance.book;
         req.body.due_back_formatted = req.body.due_back ? moment(req.body.due_back).format('YYYY-MM-DD') : '';;
@@ -377,8 +421,21 @@ exports.bookinstance_update_post_api = [
         status: req.body.status,
         due_back: req.body.due_back
       };
-
+    if(bookinstance.status !== "Available" &&  (bookinstance.due_back == undefined || bookinstance.due_back == null)){
       console.log(bookinstance)
+      res.status(400).json({
+        error: "Validation Error",
+        book_list: [], 
+        selected_book: req.params.id , 
+        errors: [
+            {
+                param: due_back,
+                msg: "Due date is required"
+            }
+        ], 
+        bookinstance: req.body 
+    });    
+    }
 
    if (!errors.isEmpty()) {
         req.body.book = oldBookInstance.book;
