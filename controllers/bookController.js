@@ -711,7 +711,7 @@ exports.book_update_post_api = [
         }
         else {
             // Data from form is valid. Update the record.
-            Book.findByIdAndUpdate(req.params.id, book,{new: true}, function (err,updatedBook) {
+            Book.findByIdAndUpdate(req.params.id, book,{new: true, runValidators: true}, function (err,updatedBook) {
                 if (err) { 
                     return res.status(500).json({
                         error: err.message

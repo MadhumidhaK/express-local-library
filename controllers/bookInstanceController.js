@@ -331,7 +331,8 @@ exports.bookinstance_update_post = [
         status: req.body.status,
         due_back: req.body.due_back
       };
-
+      console.log(".......");
+      console.log(bookinstance);
    if (!errors.isEmpty()) {
         req.body.book = oldBookInstance.book;
         req.body.due_back_formatted = req.body.due_back ? moment(req.body.due_back).format('YYYY-MM-DD') : '';;
@@ -341,7 +342,7 @@ exports.bookinstance_update_post = [
    }
    else {
        // Data from form is valid.
-       BookInstance.findByIdAndUpdate(req.params.id, bookinstance).exec(function(err, updatedBookInstance){
+       BookInstance.findByIdAndUpdate(req.params.id, bookinstance, {new: true, runValidators: true}).exec(function(err, updatedBookInstance){
         if (err) {
             console.log(err);
              return next(err); 
@@ -377,6 +378,8 @@ exports.bookinstance_update_post_api = [
         due_back: req.body.due_back
       };
 
+      console.log(bookinstance)
+
    if (!errors.isEmpty()) {
         req.body.book = oldBookInstance.book;
         req.body.due_back_formatted = req.body.due_back ? moment(req.body.due_back).format('YYYY-MM-DD') : '';;
@@ -391,7 +394,7 @@ exports.bookinstance_update_post_api = [
    }
    else {
        // Data from form is valid.
-       BookInstance.findByIdAndUpdate(req.params.id, bookinstance, {new: true}).exec(function(err, updatedBookInstance){
+       BookInstance.findByIdAndUpdate(req.params.id, bookinstance, {new: true, runValidators: true}).exec(function(err, updatedBookInstance){
         if (err) {
             console.log(err);
              return res.status(500).json({

@@ -472,7 +472,7 @@ exports.author_update_post = [
                         date_of_death: req.body.date_of_death
                     }
                     
-                    Author.findByIdAndUpdate(req.params.id, author, {}, function(err, updatedAuthor){
+                    Author.findByIdAndUpdate(req.params.id, author,{new: true, runValidators: true}, function(err, updatedAuthor){
                         if (err) {
                             debug('update error:' + err);
                              return next(err); 
@@ -544,7 +544,7 @@ exports.author_update_post_api = [
                         date_of_death: req.body.date_of_death
                     }
                     
-                    Author.findByIdAndUpdate(req.params.id, author, {new: true}, function(err, updatedAuthor){
+                    Author.findByIdAndUpdate(req.params.id, author, {new: true, runValidators: true}, function(err, updatedAuthor){
                         if (err) {
                             debug('update error:' + err);
                             return res.status(500).json({

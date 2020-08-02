@@ -362,7 +362,7 @@ exports.genre_update_post = [validator.body('name', 'Genre name required').trim(
             if(existing_genre){
                 return res.redirect(existing_genre.url);
             }else{
-                Genre.findByIdAndUpdate(req.params.id, genre).exec(function(err, updatedGenre){
+                Genre.findByIdAndUpdate(req.params.id, genre, {new: true, runValidators: true}).exec(function(err, updatedGenre){
                     if(err){
                         return next(err)
                     }
@@ -403,7 +403,7 @@ exports.genre_update_post_api = [validator.body('name', 'Genre name required').t
             if(existing_genre){
                 return res.redirect(existing_genre.url);
             }else{
-                Genre.findByIdAndUpdate(req.params.id, genre, {new: true}).exec(function(err, updatedGenre){
+                Genre.findByIdAndUpdate(req.params.id, genre, {new: true, runValidators: true}).exec(function(err, updatedGenre){
                     if(err){
                         return  res.status(500).json({
                             error: err.message
