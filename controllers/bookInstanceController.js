@@ -300,7 +300,7 @@ exports.bookinstance_delete_post_api = function(req, res) {
 };
 
 // Display BookInstance update form on GET.
-exports.bookinstance_update_get = function(req, res) {
+exports.bookinstance_update_get = function(req, res, next) {
 
     BookInstance.findById(req.params.id).populate('book').exec(function(err, bookInstance){
         if(err){
@@ -370,7 +370,7 @@ exports.bookinstance_update_post = [
           selected_book: req.params.id , 
           errors: [
               {
-                  param: due_back,
+                  param: 'due_back',
                   msg: "Due date is required"
               }
           ], 
