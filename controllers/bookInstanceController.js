@@ -130,7 +130,7 @@ exports.bookinstance_create_post =[
           selected_book: req.params.id , 
           errors: [
               {
-                  param: due_back,
+                  param: 'due_back',
                   msg: "Due date is required"
               }
           ], 
@@ -191,7 +191,7 @@ exports.bookinstance_create_post_api =[
           selected_book: req.params.id , 
           errors: [
               {
-                  param: due_back,
+                  param: 'due_back',
                   msg: "Due date is required"
               }
           ], 
@@ -429,7 +429,7 @@ exports.bookinstance_update_post_api = [
         selected_book: req.params.id , 
         errors: [
             {
-                param: due_back,
+                param: 'due_back',
                 msg: "Due date is required"
             }
         ], 
