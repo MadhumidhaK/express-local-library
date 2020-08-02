@@ -21,10 +21,11 @@ var bookInstanceSchema = new Schema({
     },
     due_back: {
         type: Date,
-        default: Date.now(),
         required: function(){
             return this.status !== "Available"
-        }
+        },
+        default: Date.now()
+        
     }
 });
 
