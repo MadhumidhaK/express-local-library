@@ -255,7 +255,9 @@ exports.bookinstance_delete_post = function(req, res) {
 
 exports.bookinstance_delete_post_api = function(req, res) {
     BookInstance.findByIdAndRemove(req.body.bookinstanceid, function deletebookInstance(err) {
+        console.log("delete req of " + req.body.bookinstanceid);
         if (err) { 
+            console.log(err);
             return res.status(500).json({
                 error: err.message
             })
