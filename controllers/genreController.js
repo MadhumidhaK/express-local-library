@@ -155,7 +155,7 @@ exports.genre_create_post_api = function(req, res,next) {
                     error: err.message
                 });
             }
-            if(existing_genre && existing_genre._id != req.params.id){
+            if(existing_genre){
                 return res.status(400).json({
                     error: "Genre already exists"
                 });
@@ -400,7 +400,7 @@ exports.genre_update_post_api = [validator.body('name', 'Genre name required').t
                     error: err.message
                 });
             }
-            if(existing_genre){
+            if(existing_genre && existing_genre._id != req.params.id){
                 return res.redirect(existing_genre.url);
             }else{
                 Genre.findByIdAndUpdate(req.params.id, genre, {new: true, runValidators: true}).exec(function(err, updatedGenre){
@@ -413,7 +413,6 @@ exports.genre_update_post_api = [validator.body('name', 'Genre name required').t
                         genre: updatedGenre
                     });
                 })
-                
             }
         })
     }
