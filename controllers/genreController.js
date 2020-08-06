@@ -167,7 +167,7 @@ exports.genre_create_post_api = function(req, res,next) {
                         })
                     }
                     res.status(201).json({
-                        genre: genre
+                        genre: savedGenre
                     });
                 })
             }
