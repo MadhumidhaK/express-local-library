@@ -155,7 +155,7 @@ exports.genre_create_post_api = function(req, res,next) {
                     error: err.message
                 });
             }
-            if(existing_genre){
+            if(existing_genre && existing_genre._id != req.params.id){
                 return res.status(400).json({
                     error: "Genre already exists"
                 });
