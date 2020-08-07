@@ -227,7 +227,7 @@ exports.bookinstance_create_post_api =[
                 })
             }
               // Successful - redirect to new record.
-              res.status(200).json({
+              res.status(201).json({
                   bookInstance: bookinstance
               });
            });
