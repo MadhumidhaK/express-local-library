@@ -70,7 +70,7 @@ exports.genre_detail_api = function(req, res, next) {
         genre_books: function(callback){
             Book.find({
                 genre: req.params.id
-            }).exec(callback);
+            }).populate('author').exec(callback);
         }
     },
     function(err, results){
