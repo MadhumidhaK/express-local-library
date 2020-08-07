@@ -455,7 +455,7 @@ exports.book_delete_post_api = function(req, res, next) {
         }
         if (results.bookInstances.length > 0) {
             res.status(405).json({
-                error: 'Delete the copies of this book, before trying delete the book',
+                error: 'Delete the copies of this book, before trying delete this book',
                 book: results.book, 
                 bookInstances: results.bookInstances 
             } );
